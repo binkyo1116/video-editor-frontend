@@ -55,7 +55,7 @@ function CreateProjectButton() {
     <>
       <div className='' data-bs-toggle='modal' data-bs-target='#kt_modal_1'>
         <label
-          className=' h-250px btn btn-outline btn-outline-dashed btn-outline-default p-7  align-items-center mb-10'
+          className=' h-250px btn btn-outline btn-outline-dashed btn-outline-default p-7  align-items-center'
           htmlFor='kt_create_account_form_account_type_personal'
         >
           <div className='symbol symbol-100px'>

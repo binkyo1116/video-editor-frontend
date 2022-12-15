@@ -8,6 +8,7 @@ export function Dropdown(props: {
   copyProject: (project: Project) => void
   openProject: (e: any) => void
   focusNameInput: () => void
+  setIsDownloading: (isDownloading: boolean) => void
 }) {
   const deleteProject = () => {
     props.deleteProjectById(props.project._id as string)
@@ -18,6 +19,7 @@ export function Dropdown(props: {
   }
 
   const download = async () => {
+    props.setIsDownloading(true)
     const blob = await fetch(
       `${API_BASE_URL}/media/${props.project?._id}/video/${props.project.renderedVideoUrl}`
     ).then((res) => res.blob())
@@ -31,6 +33,7 @@ export function Dropdown(props: {
     aTag.click()
     URL.revokeObjectURL(tempUrl)
     aTag.remove()
+    props.setIsDownloading(false)
   }
 
   return (

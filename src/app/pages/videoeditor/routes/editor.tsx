@@ -2,25 +2,25 @@
 import MediaPool from '../components/mediaPool/mediaPool'
 import Controls from '../components/controls/controls'
 import Timeline from '../components/timeline/timeline'
-import { Media, Segment, SegmentID, SelectedNodeType } from '../model/types'
-import React, { useState } from 'react'
-import { DragDropContext } from 'react-beautiful-dnd'
+import {Media, Segment, SegmentID, SelectedNodeType} from '../model/types'
+import React, {useState} from 'react'
+import {DragDropContext} from 'react-beautiful-dnd'
 import LayerPool from '../components/layer/layer'
-import { useLocation, useParams } from 'react-router-dom'
+import {useLocation, useParams} from 'react-router-dom'
 import ImagePool from '../components/imagePool/imagePool'
 import ImageEditor from '../components/imageEditor/imageEditor'
 import Konva from 'konva'
 import Properties from '../components/properties/properties'
 import TextEditor from '../components/textPool/textPool'
 import AudioPool from '../components/audioPool/audioPool'
-import { API_BASE_URL, getProjectById } from '../../project/core/_request'
+import {API_BASE_URL, getProjectById} from '../../project/core/_request'
 import axios from 'axios'
-import { checkMediaType } from '../helper'
-import { useEffect } from 'react'
-import { Project } from '../../project/core/_models'
+import {checkMediaType} from '../helper'
+import {useEffect} from 'react'
+import {Project} from '../../project/core/_models'
 import GifViewer from 'gif-viewer'
-import { setProject } from '../../../../features/editor/projectSlice'
-import { useAppDispatch } from '../../../hooks'
+import {setProject} from '../../../../features/editor/projectSlice'
+import {useAppDispatch} from '../../../hooks'
 
 const Editor = React.forwardRef(
   (
@@ -75,9 +75,9 @@ const Editor = React.forwardRef(
 
     const [selectedTransformer, setSelectedTransformer] = useState<Konva.Transformer>()
 
-    const { search } = useLocation()
+    const {search} = useLocation()
 
-    const { id } = useParams()
+    const {id} = useParams()
 
     const [isRenderingFinished, setIsRenderingFinished] = useState<boolean>(true)
 
@@ -86,6 +86,8 @@ const Editor = React.forwardRef(
     const [projectName, setProjectName] = useState('')
 
     const dispatch = useAppDispatch()
+
+    const [isDownloading, setIsDownloading] = useState(false)
 
     useEffect(() => {
       loadProject().catch((error) => console.log(error))
@@ -144,7 +146,7 @@ const Editor = React.forwardRef(
                     }
                     return {
                       ...media,
-                      source: { ...media.source, element: elm },
+                      source: {...media.source, element: elm},
                       gifImages: gifViewer.gif.images,
                     }
                   })
@@ -201,7 +203,7 @@ const Editor = React.forwardRef(
                             ...t,
                             media: {
                               ...t.media,
-                              source: { ...t.media.source, element: elm },
+                              source: {...t.media.source, element: elm},
                               gifImages: gifViewer.gif.images,
                             },
                           }
@@ -219,7 +221,7 @@ const Editor = React.forwardRef(
           setRenderedTime(currentProject.lastRenderedTime as string)
 
           if (currentProject.isRendering) {
-            let timerId = window.setInterval(() => { }, 0)
+            let timerId = window.setInterval(() => {}, 0)
             while (timerId--) clearInterval(timerId)
             const timer = setInterval(async () => {
               const loadedProject = await getProjectById(id as string)
@@ -245,7 +247,7 @@ const Editor = React.forwardRef(
     const handleOnDragEnd = (result: any) => {
       if (!result.destination) return
 
-      const { source, destination } = result
+      const {source, destination} = result
 
       if (source.droppableId === destination.droppableId) {
         const items = props.mediaList.slice()
@@ -318,7 +320,7 @@ const Editor = React.forwardRef(
           props.trackList.map((tl, track) => {
             return tl.map((t, index) => {
               if (props.selectedSegment?.track === track && props.selectedSegment.index === index)
-                return { ...t, duration: props.projectDuration }
+                return {...t, duration: props.projectDuration}
               return t
             })
           })
@@ -417,6 +419,7 @@ const Editor = React.forwardRef(
 
     const download = async () => {
       if (props.renderedVideoUrl) {
+        setIsDownloading(true)
         const blob = await fetch(
           `${API_BASE_URL}/media/${id}/video/${props.renderedVideoUrl}`
         ).then((res) => res.blob())
@@ -430,6 +433,7 @@ const Editor = React.forwardRef(
         aTag.click()
         URL.revokeObjectURL(tempUrl)
         aTag.remove()
+        setIsDownloading(false)
       }
     }
 
@@ -437,12 +441,12 @@ const Editor = React.forwardRef(
       <div>
         <div
           className='position-absolute align-items-center'
-          style={{ top: 0, width: 'calc(100vw - 100px)', height: 40 }}
+          style={{top: 0, width: 'calc(100vw - 100px)', height: 40}}
         >
           <div className='row'>
             <div className='col-xl-5'></div>
             <div className='col-xl-2 text-center'>
-              <h4 style={{ textTransform: 'capitalize', fontWeight: 'normal' }}>{projectName}</h4>
+              <h4 style={{textTransform: 'capitalize', fontWeight: 'normal'}}>{projectName}</h4>
             </div>
             <div className='col-xl-5 d-flex justify-content-end'>
               <button
@@ -464,13 +468,14 @@ const Editor = React.forwardRef(
                       ? 'Rendering ...'
                       : 'Render'
                     : !isRenderingFinished
-                      ? 'Rendering ...'
-                      : 'Re-render'}
+                    ? 'Rendering ...'
+                    : 'Re-render'}
                 </span>
+                <div className='spinner' style={{width: 30, height: 30}}></div>
               </button>
               {props.renderedVideoUrl !== '' && props.renderedVideoUrl !== undefined && (
                 <button
-                  className='btn btn-primary d-flex justify-content-center align-items-center mx-2'
+                  className='btn btn-primary d-flex justify-content-center align-items-center mx-2 spinner spinner-white spinner-right'
                   onClick={download}
                   style={{
                     height: '28px',
@@ -481,10 +486,22 @@ const Editor = React.forwardRef(
                   }}
                   title='Download'
                 >
-                  <span>
-                    Download (Rendered at {new Date(renderedTime as string).toLocaleDateString()},
-                    {new Date(renderedTime as string).toLocaleTimeString()})
-                  </span>
+                  {isDownloading ? (
+                    <>
+                      Generating download link
+                      &nbsp;
+                      <span
+                        className='spinner-border spinner-border-sm fs-5'
+                        role='status'
+                        aria-hidden='true'
+                      ></span>
+                    </>
+                  ) : (
+                    <span>
+                      Download (Rendered at {new Date(renderedTime as string).toLocaleDateString()},
+                      {new Date(renderedTime as string).toLocaleTimeString()}){' '}
+                    </span>
+                  )}
                 </button>
               )}
             </div>
@@ -524,7 +541,7 @@ const Editor = React.forwardRef(
             </div>
             <div
               className='col-xl-2 position-absolute'
-              style={{ top: 40, height: '50vh', width: '17%', zIndex: 3, right: 0 }}
+              style={{top: 40, height: '50vh', width: '17%', zIndex: 3, right: 0}}
             >
               <Properties
                 selectedSegment={props.selectedSegment}
@@ -550,8 +567,8 @@ const Editor = React.forwardRef(
           }}
         >
           <DragDropContext onDragEnd={handleOnDragEnd}>
-            <div className='overflow-auto' style={{ display: 'flex', flexDirection: 'column' }}>
-              <div className='row' style={{ height: '50vh', overflow: 'hidden' }}>
+            <div className='overflow-auto' style={{display: 'flex', flexDirection: 'column'}}>
+              <div className='row' style={{height: '50vh', overflow: 'hidden'}}>
                 <div className='col-xl-2 left-sidebar'>{renderSwitch()}</div>
               </div>
               <div className='my-5'>

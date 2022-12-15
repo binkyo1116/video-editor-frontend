@@ -15,6 +15,7 @@ function ProjectItem(props: {
   const [name, setName] = useState(props.project.name)
   const nameInput = useRef<any>()
   const navigate = useNavigate()
+  const [isDownloading, setIsDownloading] = useState(false)
 
   const focusNameInput = () => {
     nameInput.current.focus()
@@ -45,22 +46,49 @@ function ProjectItem(props: {
             />
             <div className='position-absolute' style={{top: 10, right: 10}}>
               <span className='badge badge-light-success fw-bolder fs-8'>
-                {props.project.isRendering ? 'Rendering' : ''}
+                {props.project.isRendering && (
+                  <>
+                    <span>Rendering</span>&nbsp;
+                    <span className='spinner-border spinner-border-sm'></span>
+                  </>
+                )}
               </span>
             </div>
 
-            <div className='my-0'>
+            <div className='position-absolute' style={{top: 10, left: 10}}>
+              <span className='badge badge-light-success fw-bolder fs-8'>
+                {isDownloading && (
+                  <>
+                    <span>Generating Download Link</span>&nbsp;
+                    <span className='spinner-border spinner-border-sm'></span>
+                  </>
+                )}
+              </span>
+            </div>
+
+            <div
+              style={{bottom: 5, right: 10}}
+              className='my-0 dropdown dropdown-inline position-absolute '
+            >
               <button
-                style={{bottom: 5, right: 10}}
-                className='position-absolute btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                data-kt-menu-trigger='hover'
-                data-kt-menu-placement='bottom-end'
-                data-kt-menu-flip='top-end'
+                type='button'
+                className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
+                data-bs-toggle='dropdown'
+                aria-haspopup='true'
+                aria-expanded='false'
+                // className='position-absolute btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
+                // data-kt-menu-trigger='hover'
+                // data-kt-menu-placement='bottom-end'
+                // data-kt-menu-flip='top-end'
               >
                 <i className='bi bi-three-dots fs-3'></i>
               </button>
-              <div className='menu menu-sub menu-sub-dropdown' data-kt-menu='true'>
+              <div
+                className='dropdown-menu'
+                // className='menu menu-sub menu-sub-dropdown' data-kt-menu='true'
+              >
                 <Dropdown
+                  setIsDownloading={setIsDownloading}
                   project={props.project}
                   focusNameInput={focusNameInput}
                   openProject={openProject}
@@ -72,7 +100,7 @@ function ProjectItem(props: {
           </div>
         </div>
 
-        <div className='mb-1' style={{height:'60px', overflowY:'auto'}}>
+        <div className='mb-1' style={{height: '60px', overflowY: 'auto'}}>
           <p className='text-gray-800 fw-normal'>{`Edited at ${props.updatedDate?.toLocaleDateString()}, ${props.updatedDate?.toLocaleTimeString()}`}</p>
           <p className='text-gray-800 fw-normal'>
             {props.project?.lastRenderedTime === undefined
