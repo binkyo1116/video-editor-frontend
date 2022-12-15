@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Metronic React Demo 1" />
+    <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" />
+    <title>NDTV | INDIA</title>
+    <link rel="stylesheet" id="layout-styles-anchor" href="%PUBLIC_URL%/splash-screen.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Akronim&family=Alex+Brush&family=Arbutus&family=Are+You+Serious&family=Arizonia&family=Astloch&family=Babylonica&family=Big+Shoulders+Stencil+Text&family=Bigelow+Rules&family=Birthstone+Bounce&family=Bonbon&family=Bowlby+One+SC&family=Bubblegum+Sans&family=Bungee+Inline&family=Bungee+Shade&family=Bungee+Spice&family=Butcherman&family=Caveat&family=Cherish&family=Combo&family=Comforter&family=Cormorant+Unicase&family=Dawning+of+a+New+Day&family=Diplomata&family=Diplomata+SC&family=Dokdo&family=DotGothic16&family=Eater&family=Encode+Sans+SC&family=Fascinate&family=Faster+One&family=Fleur+De+Leah&family=Freckle+Face&family=Geo&family=Geostar&family=Geostar+Fill&family=Glass+Antiqua&family=Hanalei+Fill&family=Henny+Penny&family=Island+Moments&family=Jacques+Francois+Shadow&family=Just+Another+Hand&family=Kalam:wght@300&family=Kenia&family=Kings&family=Kirang+Haerang&family=Kristi&family=Lakki+Reddy&family=League+Script&family=Leckerli+One&family=Lobster&family=Londrina+Outline&family=Londrina+Sketch&family=Long+Cang&family=Mansalva&family=Megrim&family=Merienda&family=Miltonian+Tattoo&family=Mogra&family=Monofett&family=Monoton&family=Moo+Lah+Lah&family=Mr+Dafoe&family=Nabla&family=Nanum+Brush+Script&family=Neonderthaw&family=Nosifer&family=Notable&family=Nova+Mono&family=Oi&family=Orbitron&family=PT+Sans+Narrow&family=Pacifico&family=Parisienne&family=Passions+Conflict&family=Permanent+Marker&family=Qwigley&family=Rampart+One&family=Rancho&family=Reenie+Beanie&family=Ribeye+Marrow&family=Rock+Salt&family=Rubik+80s+Fade&family=Rubik+Glitch&family=Rubik+Microbe&family=Rubik+Moonrocks&family=Rubik+Puddles&family=Rubik+Spray+Paint&family=Rubik+Storm&family=Rubik+Vinyl&family=Rubik+Wet+Paint&family=Saira+Stencil+One&family=Sassy+Frass&family=Satisfy&family=Sedgwick+Ave+Display&family=Sevillana&family=Shrikhand&family=Silkscreen&family=Snowburst+One&family=Sriracha&family=Sue+Ellen+Francisco&family=Swanky+and+Moo+Moo&family=Tangerine&family=Vast+Shadow&family=Vujahday+Script&family=Wallpoet&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body id="kt_body" class="page-loading splash-screen">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--begin::Theme mode setup on page load-->
+    <script>
+      if (document.documentElement) {
+        // var defaultThemeMode = 'system'
+
+        // var hasKTName = document.body.hasAttribute('data-kt-name')
+        // var lsKey = 'kt_' + (hasKTName ? name + '_' : '') + 'theme_mode_value'
+        // // var themeMode = localStorage.getItem(lsKey)
+        var themeMode = 'dark'
+        // if (!themeMode) {
+        //   if (defaultThemeMode === 'system') {
+        //     themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        //   } else {
+        //     themeMode = defaultThemeMode
+        //   }
+        // }
+        
+
+        document.documentElement.setAttribute('data-theme', themeMode)
+      }
+    </script>
+    <!--end::Theme mode setup on page load-->
+
+    <div id="root" class="d-flex flex-column flex-root"></div>
+    <div id="splash-screen" class="splash-screen">
+      <img src="%PUBLIC_URL%/media/logos/default-small.svg" alt="Metronic logo" />
+      <span>Loading ...</span>
+    </div>
+    <div id="root-modals"></div>
+  </body>
+</html>

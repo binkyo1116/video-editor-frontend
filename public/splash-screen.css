@@ -1,0 +1,172 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-size:11px !important
+
+}
+
+.splash-screen {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: Helvetica, 'sans-serif';
+  background-color: #f2f3f8;
+  color: #5E6278;
+  line-height: 1;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.splash-screen span {
+  color: #5E6278;
+  transition: none !important;
+  text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.splash-screen img {
+  margin-left: calc(100vw - 100%);
+  margin-bottom: 30px;
+  height: 30px !important;
+}
+
+[data-theme="dark"] .splash-screen {
+  background-color: #151521;
+  color: #92929F;
+}
+
+[data-theme="dark"] .splash-screen span {
+  color: #92929F;
+}
+
+.ReactQueryDevtools button svg{ display: none !important;}
+
+form .form-control-lg{ border-radius: 0px;}
+form #kt_sign_in_submit{ border-radius: 0px !important;}
+
+.aside {
+  width: 70px !important;
+
+}
+
+.aside .aside-menu {
+  width: 70px !important;
+}
+
+
+.aside .aside-menu .menu-icon {
+  display: block !important;
+    text-align: center;
+    width: auto !important;
+}
+.aside .aside-menu .menu-title {
+  display: block !important;
+    text-align: center;
+    margin-top: 2px;
+    
+}
+
+.aside .aside-menu .menu-link {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  display: block !important;
+  padding-bottom: 0px !important;
+}
+
+
+.aside-enabled.aside-fixed.header-fixed .header {
+  left: 70px !important;
+}
+
+.content .post{ padding-left: 70px !important; padding-right: 0px !important; }
+.aside .aside-logo {
+  padding: 0 4px !important;
+}
+
+.controlBtn .col-xl-1{ width: 55px; }
+.controlBtn button{ border-radius: none !important; }
+
+.propertyBtn button{
+  background: #2f2f36;
+  color: white;
+  border: none;
+  padding: 5px;
+  /* margin-right: 3px; */
+  margin-bottom: 3px;
+}
+.propertyBtn input{
+  background: #2f2f36;
+  color: white;
+  border: none;
+  margin-right: 3px;
+  height: 29px;
+}
+
+
+.svg-icon.svg-icon-2 svg {
+  height: 1.5rem !important;
+  width: 1.5rem !important;
+  color: white;
+  fill: white;
+}
+
+.aside-menu .menu-item {
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+
+.container, .container-xxl, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
+  padding: 0 10px !important;
+}
+
+.timeline_container__alpA2{padding-left:10px !important}
+
+.content {
+  padding: 10px 0 !important;
+}
+
+.aside .aside-logo {height: 45px !important;}
+.header-fixed .header { height: 45px !important;}
+div#kt_wrapper {
+  margin-top: 45px !important;
+}
+
+
+.videos .svg-icon.svg-icon-3x svg {
+  height: 2rem !important;
+}
+
+.left-sidebar .card .card-body{ padding:10px;}
+.aside-dark .menu .menu-item .menu-link:hover{ background-color: #2f2f36 !important;}
+
+.animation-select-alignment select {height: 30px;
+padding: 0px 10px;
+border-radius: 0;
+background: #2f2f36;
+color: white;
+margin-top: 5px;
+}
+
+.animation-select-alignment input {height: 30px;
+  padding: 0px 10px;
+  border-radius: 0;
+  background: #2f2f36;
+  color: white;
+  margin-top: 5px;
+  }
+
+.right-sidepanel{
+  padding:8px !important
+}
+
+.aside-dark .menu .menu-item .menu-link.active {
+  background-color: #2f2f36 !important;
+
+}
+
