@@ -82,7 +82,9 @@ export default function ImagePool(props: any) {
   const onClick = async () => {
     const fileInput = document.createElement('input') as HTMLInputElement
     fileInput.type = 'file'
+    fileInput.accept = 'image/jpg, image/png, image/jpeg, image/gif'
     fileInput.click()
+    
     fileInput.addEventListener('change', async (e) => {
       setStatus('Loading...')
       if (fileInput.files !== null) await props.addMedia(fileInput.files)

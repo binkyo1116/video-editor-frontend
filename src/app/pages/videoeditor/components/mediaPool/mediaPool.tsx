@@ -105,6 +105,7 @@ export default function MediaPool(props: any) {
   const onClick = async () => {
     const fileInput = document.createElement('input') as HTMLInputElement
     fileInput.type = 'file'
+    fileInput.accept = 'video/mp4, video/avi, video/mov. video/wmv'
     fileInput.click()
     fileInput.addEventListener('change', async (e) => {
       setStatus('Loading...')

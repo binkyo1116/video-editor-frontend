@@ -82,6 +82,7 @@ export default function AudioPool(props: any) {
   const onClick = async () => {
     const fileInput = document.createElement('input') as HTMLInputElement
     fileInput.type = 'file'
+    fileInput.accept = 'audio/mp3, audio/wav'
     fileInput.click()
     fileInput.addEventListener('change', async (e) => {
       setStatus('Loading...')
